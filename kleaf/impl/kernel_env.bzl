@@ -434,7 +434,7 @@ def _kernel_env_impl(ctx):
 
     setup_inputs = [
         out_file,
-        ctx.version_file,
+        ctx.info_file,
     ] + env_setup_cmds.inputs
     setup_transitive_inputs = []
     if kconfig_ext:
@@ -631,8 +631,8 @@ def _get_env_setup_cmds(ctx):
         LIBCLANG_PATH=$(dirname $(which clang))/../lib
         export LIBCLANG_PATH
     """.format(
-        get_make_jobs_cmd = status.get_volatile_status_cmd(ctx, "MAKE_JOBS"),
-        get_make_keep_going_cmd = status.get_volatile_status_cmd(ctx, "MAKE_KEEP_GOING"),
+        get_make_jobs_cmd = status.get_stable_status_cmd(ctx, "STABLE_MAKE_JOBS"),
+        get_make_keep_going_cmd = status.get_stable_status_cmd(ctx, "STABLE_MAKE_KEEP_GOING"),
         kernel_build_workspace_root = ctx.label.workspace_root,
         kernel_build_label = str(ctx.label).removesuffix("_env"),
     )

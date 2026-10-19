@@ -164,6 +164,7 @@ def _get_config_env(ctx):
             config_env_setup_script,
             ctx.file.env_setup_script,
             ctx.version_file,
+            ctx.info_file,
         ], transitive = [target.files for target in ctx.attr.config_out_dir_files]),
         tools = depset([
             ctx.file._build_utils_sh,
